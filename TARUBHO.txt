@@ -1,0 +1,40 @@
+CREATE TABLE departments(
+department_id INT identity (1,1) PRIMARY KEY,
+department_name VARCHAR(100) NOT NULL,
+created_at DATETIME DEFAULT GETDATE(),
+updated_at DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE users (
+user_id INT identity (1,1) PRIMARY KEY,
+username VARCHAR(50) NOT NULL UNIQUE,
+password VARCHAR(255) NOT NULL,
+first_name	VARCHAR(100) NOT NULL,
+middle_name VARCHAR(100) NULL,
+last_name VARCHAR(100) NOT NULL,
+extension_name VARCHAR(10) NULL,
+
+address TEXT NULL,
+contact_number VARCHAR(20) NULL,
+gender VARCHAR(10) CHECK (gender IN ('male','female','other')) NULL,
+birthday DATE NULL,
+profile_picture image NULL,
+
+role VARCHAR(50) NOT NULL DEFAULT 'User',
+department_id INT NULL,
+status VARCHAR(10) CHECK (status IN ('active','inactive')) NOT NULL DEFAULT 'inactive',
+last_login DATETIME NULL,
+created_at DATETIME DEFAULT GETDATE(),
+updated_at DATETIME DEFAULT GETDATE(),
+
+FOREIGN KEY (department_id) REFERENCES departments(department_id) ON DELETE SET NULL
+);
+
+USE [GUINTOS5C1]
+
+INSERT INTO Users (user_id, username, password, first_name, middle_name, last_name, extension_name, address) VALUES
+('MAR0000000001', 'ABAD, REXZELL M.', 'BSIT', 'S5C3', '3rd', '1st', 'Enrolled'),
+USE [GUINTOS5C1]
+
+INSERT INTO dbo.users (user_id, username, password, first_name, middle_name, last_name, extension_name, address, contact_number, gender, birthday, profile_picture, role, department_id, status, last_login, created_at, updated_at)VALUES
+('', 'admin123', '123123123', 'Jake Angelo', 'Pansacala', 'Guinto', '', 'Rizal', '0956-234-1234', 'male', '2001-10-07', '', 'Admin', '', 'active', '', '', '');
