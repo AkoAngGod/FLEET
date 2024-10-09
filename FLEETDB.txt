@@ -1,0 +1,36 @@
+Create Database FLEET;
+
+CREATE TABLE User_Accounts(
+ID INT identity (1,1) PRIMARY KEY,
+Username VARCHAR(100) NOT NULL UNIQUE,
+Password VARCHAR(100) NOT NULL,
+
+Created_at DATETIME DEFAULT GETDATE(),
+Updated_at DATETIME DEFAULT GETDATE()
+);
+
+
+CREATE TABLE User_Profile (
+PID INT identity (1,1) PRIMARY KEY,
+
+Firstname	VARCHAR(100) NOT NULL,
+Middlename VARCHAR(100) NULL,
+Lastname VARCHAR(100) NOT NULL,
+Extension VARCHAR(10) NULL,
+
+Address TEXT NULL,
+Contact VARCHAR(20) NULL,
+Gender VARCHAR(10) CHECK (gender IN ('male','female','other')) NULL,
+Birthday DATE NULL,
+ProfileImage image NULL,
+ID INT NULL,
+
+Role VARCHAR(50) NOT NULL DEFAULT 'User',
+status VARCHAR(10) CHECK (status IN ('active','inactive')) NOT NULL DEFAULT 'inactive',
+last_login DATETIME NULL,
+
+created_at DATETIME DEFAULT GETDATE(),
+updated_at DATETIME DEFAULT GETDATE(),
+
+FOREIGN KEY (ID) REFERENCES User_Accounts(ID) ON DELETE SET NULL
+);
